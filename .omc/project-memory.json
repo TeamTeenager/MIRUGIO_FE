@@ -38,14 +38,14 @@
     },
     {
       "path": "src/store/useGameStore.ts",
-      "accessCount": 21,
-      "lastAccessed": 1774675452976,
+      "accessCount": 25,
+      "lastAccessed": 1774676893434,
       "type": "file"
     },
     {
       "path": "src/App.tsx",
-      "accessCount": 12,
-      "lastAccessed": 1774675044195,
+      "accessCount": 18,
+      "lastAccessed": 1774677089685,
       "type": "file"
     },
     {
@@ -142,6 +142,12 @@
       "path": "src/lib/auth.ts",
       "accessCount": 1,
       "lastAccessed": 1774670814512,
+      "type": "file"
+    },
+    {
+      "path": "src/components/ui/PhoneFrame.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1774676961102,
       "type": "file"
     }
   ],

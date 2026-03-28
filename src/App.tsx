@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Onboarding from './components/ui/Onboarding'
+import PhoneFrame from './components/ui/PhoneFrame'
 import TabBar from './components/ui/TabBar'
 import Building from './components/building/Building'
 import StreakBadge from './components/ui/StreakBadge'
@@ -37,10 +38,11 @@ export default function App() {
   useSupabaseInit()
   const { floors, activeTab, setActiveTab } = useGameStore()
 
-  if (!done) return <Onboarding onDone={finish} />
+  if (!done) return <PhoneFrame><Onboarding onDone={finish} /></PhoneFrame>
 
   return (
-    <div className="min-h-svh bg-white flex flex-col max-w-sm mx-auto">
+    <PhoneFrame>
+    <div className="bg-white flex flex-col h-full">
       {/* 헤더 */}
       <div className="flex items-center justify-between px-5 pt-12 pb-4 shrink-0">
         <div>
@@ -84,5 +86,6 @@ export default function App() {
 
       <WarningModal />
     </div>
+    </PhoneFrame>
   )
 }

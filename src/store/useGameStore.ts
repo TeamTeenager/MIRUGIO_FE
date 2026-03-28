@@ -76,7 +76,7 @@ export const useGameStore = create<ExtendedState & GameActions>()(
       },
 
       addTask: (title, importance) => {
-        const { floors, streak, lastProcrastinatedDate, showWarning, userId } = get()
+        const { floors, streak, showWarning, userId } = get()
 
         const today = new Date().toDateString()
 
@@ -87,15 +87,8 @@ export const useGameStore = create<ExtendedState & GameActions>()(
           get().collapseBuilding()
           return
         }
-        const yesterday = new Date()
-        yesterday.setDate(yesterday.getDate() - 1)
-
-        let newStreak = streak
-        if (lastProcrastinatedDate === yesterday.toDateString()) {
-          newStreak = streak + 1
-        } else if (lastProcrastinatedDate !== today) {
-          newStreak = 1
-        }
+        // 테스트 중: 등록할 때마다 +1
+        const newStreak = streak + 1
 
         const taskId = crypto.randomUUID()
         const floorId = crypto.randomUUID()
