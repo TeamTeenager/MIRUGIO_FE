@@ -124,7 +124,8 @@ export const useGameStore = create<ExtendedState & GameActions>()(
         const newFloors = [...floors, newFloor]
         const newStability = calcStability(newFloors)
 
-        const isConsecutive = newFloors.length >= 2 && newFloors.slice(-2).every(f => f.importance === importance)
+        // 마지막 2개의 층이 현재 추가한 층의 중요도와 같은지 체크
+        const isConsecutive = floors.length >= 1 && floors.slice(-1).every(f => f.importance === importance)
         const currentShowWarning = newStability < 40 || isConsecutive
         const currentWarningType = isConsecutive ? 'consecutive' : (newStability < 40 ? 'stability' : null)
 
@@ -206,7 +207,8 @@ export const useGameStore = create<ExtendedState & GameActions>()(
 
         const newFloors = [...floors, newFloor]
         const newStability = calcStability(newFloors)
-        const isConsecutive = newFloors.length >= 2 && newFloors.slice(-2).every(f => f.importance === task.importance)
+        // 마지막 층이 현재 미루려는 일의 중요도와 같은지 체크
+        const isConsecutive = floors.length >= 1 && floors.slice(-1).every(f => f.importance === task.importance)
         const currentShowWarning = newStability < 40 || isConsecutive
         const currentWarningType = isConsecutive ? 'consecutive' : (newStability < 40 ? 'stability' : null)
 
