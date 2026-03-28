@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Splash from './components/ui/Splash'
 import Onboarding from './components/ui/Onboarding'
 import PhoneFrame from './components/ui/PhoneFrame'
 import TabBar from './components/ui/TabBar'
@@ -14,12 +15,10 @@ import { applyTheme } from './lib/theme'
 applyTheme()
 
 function useOnboarding() {
-  const [done, setDone] = useState(() => localStorage.getItem('onboarding-done') === 'true')
-  const finish = () => {
-    localStorage.setItem('onboarding-done', 'true')
-    setDone(true)
-  }
-  return { done, finish }
+  const [splash, setSplash] = useState(true)
+  const [done, setDone] = useState(false)
+  const finish = () => setDone(true)
+  return { splash, setSplash, done, finish }
 }
 
 function useSupabaseInit() {
@@ -34,10 +33,11 @@ function useSupabaseInit() {
 }
 
 export default function App() {
-  const { done, finish } = useOnboarding()
+  const { splash, setSplash, done, finish } = useOnboarding()
   useSupabaseInit()
   const { floors, activeTab, setActiveTab } = useGameStore()
 
+  if (splash) return <PhoneFrame><Splash onDone={() => setSplash(false)} /></PhoneFrame>
   if (!done) return <PhoneFrame><Onboarding onDone={finish} /></PhoneFrame>
 
   return (

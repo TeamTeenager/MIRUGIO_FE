@@ -17,7 +17,7 @@ export default function Onboarding({ onDone }: Props) {
   const isLast = page === slides.length - 1
 
   return (
-    <div className="min-h-svh bg-white flex flex-col items-center justify-between px-6 py-16 max-w-sm mx-auto">
+    <div className="h-full bg-white flex flex-col items-center justify-between px-6 py-12 overflow-y-auto">
       {/* 인디케이터 */}
       <div className="flex gap-2">
         {slides.map((_, i) => (

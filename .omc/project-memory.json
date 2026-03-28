@@ -44,8 +44,8 @@
     },
     {
       "path": "src/App.tsx",
-      "accessCount": 18,
-      "lastAccessed": 1774677089685,
+      "accessCount": 22,
+      "lastAccessed": 1774677971675,
       "type": "file"
     },
     {
@@ -58,6 +58,12 @@
       "path": "src/components/ui/StreakBadge.tsx",
       "accessCount": 4,
       "lastAccessed": 1774675112763,
+      "type": "file"
+    },
+    {
+      "path": "src/components/ui/Onboarding.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1774677766093,
       "type": "file"
     },
     {
@@ -103,9 +109,9 @@
       "type": "file"
     },
     {
-      "path": "src/components/ui/Onboarding.tsx",
+      "path": "src/components/ui/Splash.tsx",
       "accessCount": 2,
-      "lastAccessed": 1774671088601,
+      "lastAccessed": 1774678348493,
       "type": "file"
     },
     {
