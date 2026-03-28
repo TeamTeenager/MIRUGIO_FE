@@ -68,11 +68,17 @@ export default function Floor({ floor, index, isNew }: Props) {
       />
 
       {/* 층 정보 오버레이 */}
-      <div className="absolute inset-0 flex items-center justify-between px-3 pointer-events-none">
-        <span className="text-xs font-bold text-white/60 drop-shadow">{floor.position + 1}F</span>
-        <span className="text-xs text-white/80 drop-shadow truncate mx-2 flex-1 text-right">
-          {floor.title}
-        </span>
+      <div className="absolute inset-0 flex items-center justify-between px-4 pointer-events-none">
+        <div className="bg-black/20 backdrop-blur-sm px-2 py-0.5 rounded-full border border-white/10">
+          <span className="text-[10px] font-black text-white/90 uppercase tracking-tighter">
+            {floor.position + 1}F
+          </span>
+        </div>
+        <div className="max-w-[120px] bg-white/10 backdrop-blur-sm px-2.5 py-1 rounded-lg border border-white/5">
+          <p className="text-[10px] font-bold text-white/90 truncate drop-shadow-sm">
+            {floor.title}
+          </p>
+        </div>
       </div>
 
       {/* 공사 애니메이션 - 이 층 위에 직접 표시 */}

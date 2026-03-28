@@ -17,49 +17,61 @@ export default function Onboarding({ onDone }: Props) {
   const isLast = page === slides.length - 1
 
   return (
-    <div className="h-full bg-white flex flex-col items-center justify-between px-6 py-12 overflow-y-auto">
+    <div className="h-full bg-white flex flex-col items-center justify-between px-8 py-16 relative overflow-hidden">
+      {/* 배경 장식 */}
+      <div className="absolute -top-20 -right-20 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-50" />
+      <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-rose-50 rounded-full blur-3xl opacity-50" />
+
       {/* 인디케이터 */}
-      <div className="flex gap-2">
+      <div className="flex gap-1.5 z-10">
         {slides.map((_, i) => (
           <div
             key={i}
-            className="h-1.5 rounded-full transition-all duration-300"
+            className="h-1.5 rounded-full transition-all duration-500"
             style={{
-              width: i === page ? 24 : 6,
-              background: i === page ? 'var(--theme-text)' : 'var(--theme-point)',
+              width: i === page ? 32 : 8,
+              background: i === page ? '#111827' : '#f3f4f6',
             }}
           />
         ))}
       </div>
 
       {/* 슬라이드 */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={page}
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -40 }}
-          transition={{ duration: 0.3 }}
-          className="flex flex-col items-center text-center"
-        >
-          <div className="text-8xl mb-8">{slides[page].emoji}</div>
-          <h2 className="font-bold text-2xl mb-4 leading-tight text-gray-800">{slides[page].title}</h2>
-          <p className="text-gray-400 text-sm leading-relaxed whitespace-pre-line">{slides[page].desc}</p>
-        </motion.div>
-      </AnimatePresence>
+      <div className="flex-1 flex flex-col items-center justify-center z-10 w-full">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={page}
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: -20 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="flex flex-col items-center text-center max-w-[280px]"
+          >
+            <div className="text-9xl mb-12 drop-shadow-2xl filter saturate-[1.2]">{slides[page].emoji}</div>
+            <h2 className="font-black text-3xl mb-5 leading-tight text-gray-900 tracking-tight">
+              {slides[page].title}
+            </h2>
+            <p className="text-gray-400 text-[13px] font-medium leading-relaxed whitespace-pre-line">
+              {slides[page].desc}
+            </p>
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
       {/* 버튼 */}
-      <div className="w-full flex flex-col gap-3">
+      <div className="w-full flex flex-col gap-4 z-10">
         <button
           onClick={() => isLast ? onDone() : setPage((p) => p + 1)}
-          className="w-full text-white font-bold py-4 rounded-2xl text-sm active:scale-95 transition-transform"
-          style={{ background: 'var(--theme-text)' }}
+          className="w-full bg-gray-900 text-white font-black py-5 rounded-3xl text-[15px] shadow-2xl shadow-gray-200 active:scale-95 transition-all"
         >
-          {isLast ? '시작하기 🚀' : '다음'}
+          {isLast ? 'BUILD NOW 🏗️' : 'NEXT'}
         </button>
         {!isLast && (
-          <button onClick={onDone} className="text-sm py-2" style={{ color: 'var(--theme-point)' }}>
-            건너뛰기
+          <button 
+            onClick={onDone} 
+            className="text-[11px] font-black py-2 text-gray-300 uppercase tracking-widest hover:text-gray-400 transition-colors"
+          >
+            Skip
           </button>
         )}
       </div>

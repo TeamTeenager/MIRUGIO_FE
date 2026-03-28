@@ -42,38 +42,48 @@ export default function App() {
 
   return (
     <PhoneFrame>
-    <div className="bg-white flex flex-col h-full">
+    <div className="bg-[#f8f9fa] flex flex-col h-full relative overflow-hidden">
+      {/* 장식용 그라데이션 */}
+      <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-blue-50/50 to-transparent pointer-events-none" />
+      
       {/* 헤더 */}
-      <div className="flex items-center justify-between px-5 pt-12 pb-4 shrink-0">
+      <div className="relative flex items-center justify-between px-6 pt-14 pb-6 shrink-0 z-10">
         <div>
-          <h1 className="font-bold text-2xl tracking-tight text-gray-800">미루지오</h1>
-          <p className="text-xs mt-0.5 text-gray-400">{floors.length}층 건축 중</p>
+          <h1 className="font-black text-3xl tracking-tight text-gray-900 leading-none">
+            미루지오
+          </h1>
+          <div className="flex items-center gap-1.5 mt-1.5">
+            <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+            <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest leading-none">
+              Building {floors.length} Floors
+            </p>
+          </div>
         </div>
         <StreakBadge />
       </div>
 
       {/* 탭 콘텐츠 */}
-      <div className="flex-1 overflow-hidden flex flex-col">
+      <div className="flex-1 overflow-hidden flex flex-col relative z-10">
         <AnimatePresence mode="wait">
           {activeTab === 'home' ? (
             <motion.div
               key="home"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.2 }}
-              className="flex-1 overflow-y-auto px-5 pb-4 flex flex-col justify-end"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              className="flex-1 overflow-y-auto px-5 pb-24 flex flex-col justify-end"
             >
               <Building />
             </motion.div>
           ) : (
             <motion.div
               key="tasks"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 20 }}
-              transition={{ duration: 0.2 }}
-              className="flex-1 overflow-hidden flex flex-col"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              className="flex-1 overflow-hidden flex flex-col px-5 pb-24"
             >
               <TasksView />
             </motion.div>

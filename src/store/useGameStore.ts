@@ -33,6 +33,7 @@ const initialState: ExtendedState = {
   lastProcrastinatedDate: null,
   isCollapsed: false,
   showWarning: false,
+  warningType: null,
   warningDismissedAt: null,
   activeTab: 'home',
   userId: null,
@@ -118,13 +119,18 @@ export const useGameStore = create<ExtendedState & GameActions>()(
         const newFloors = [...floors, newFloor]
         const newStability = calcStability(newFloors)
 
+        const isConsecutive = newFloors.length >= 3 && newFloors.slice(-3).every(f => f.importance === importance)
+        const currentShowWarning = newStability < 40 || isConsecutive
+        const currentWarningType = isConsecutive ? 'consecutive' : (newStability < 40 ? 'stability' : null)
+
         set((s) => ({
           tasks: [...s.tasks, task],
           floors: newFloors,
           stability: newStability,
           streak: newStreak,
           lastProcrastinatedDate: today,
-          showWarning: newStability < 40,
+          showWarning: currentShowWarning,
+          warningType: currentWarningType,
           warningDismissedAt: null,
           activeTab: 'home',
           pendingAnimation: importance,
@@ -188,6 +194,10 @@ export const useGameStore = create<ExtendedState & GameActions>()(
 
         const newFloors = [...floors, newFloor]
         const newStability = calcStability(newFloors)
+        const isConsecutive = newFloors.length >= 3 && newFloors.slice(-3).every(f => f.importance === task.importance)
+        const currentShowWarning = newStability < 40 || isConsecutive
+        const currentWarningType = isConsecutive ? 'consecutive' : (newStability < 40 ? 'stability' : null)
+
         const updatedTasks = tasks.map((t) =>
           t.id === taskId
             ? { ...t, status: 'procrastinated' as const, procrastinatedAt: new Date().toISOString() }
@@ -200,7 +210,8 @@ export const useGameStore = create<ExtendedState & GameActions>()(
           stability: newStability,
           streak: newStreak,
           lastProcrastinatedDate: today,
-          showWarning: newStability < 40,
+          showWarning: currentShowWarning,
+          warningType: currentWarningType,
           warningDismissedAt: null,
         })
       },
@@ -220,6 +231,7 @@ export const useGameStore = create<ExtendedState & GameActions>()(
           floors: newFloors,
           stability: newStability,
           showWarning: newStability < 40,
+          warningType: newStability < 40 ? 'stability' : null,
           activeTab: 'home',
         })
 
@@ -244,11 +256,11 @@ export const useGameStore = create<ExtendedState & GameActions>()(
       clearPendingComplete: () => set({ pendingComplete: null }),
 
       dismissWarning: () => {
-        set({ showWarning: false, warningDismissedAt: new Date().toISOString() })
+        set({ showWarning: false, warningType: null, warningDismissedAt: new Date().toISOString() })
       },
 
       collapseBuilding: () => {
-        set({ isCollapsed: true, showWarning: false })
+        set({ isCollapsed: true, showWarning: false, warningType: null })
       },
 
       resetBuilding: () => {
@@ -265,6 +277,7 @@ export const useGameStore = create<ExtendedState & GameActions>()(
         lastProcrastinatedDate: state.lastProcrastinatedDate,
         isCollapsed: state.isCollapsed,
         showWarning: state.showWarning,
+        warningType: state.warningType,
         warningDismissedAt: state.warningDismissedAt,
         // userId, activeTab은 persist 제외
       }),

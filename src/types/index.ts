@@ -25,6 +25,7 @@ export interface GameState {
   lastProcrastinatedDate: string | null
   isCollapsed: boolean
   showWarning: boolean
+  warningType: 'stability' | 'consecutive' | null
   warningDismissedAt: string | null
   activeTab: 'home' | 'tasks'
 }

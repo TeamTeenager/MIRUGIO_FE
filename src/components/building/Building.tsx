@@ -48,45 +48,44 @@ export default function Building() {
   return (
     <div className="flex flex-col items-center w-full">
       {/* 건물 */}
-      <div className="w-full max-w-xs relative" ref={scope}>
+      <div className="w-full max-w-[280px] relative" ref={scope}>
         {floors.length === 0 ? (
-          <div className="w-full flex flex-col items-center">
+          <div className="w-full flex flex-col items-center py-12">
             {/* 공사 안내판 */}
-            <div className="mb-3 flex flex-col items-center">
+            <motion.div 
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              className="mb-6 flex flex-col items-center"
+            >
               <div
-                className="px-4 py-2 rounded-lg text-center shadow-sm border-2"
-                style={{ background: '#fffde7', borderColor: '#f59e0b' }}
+                className="px-6 py-3 rounded-[20px] text-center shadow-xl border border-amber-100 bg-white"
               >
-                <p className="text-xs font-black text-yellow-600 tracking-widest">🚧 건설 예정지 🚧</p>
-                <p className="text-xs text-yellow-500 mt-0.5">할일을 미루면 집이 지어집니다</p>
+                <div className="flex items-center gap-2 justify-center mb-1">
+                  <span className="text-sm animate-pulse">🚧</span>
+                  <p className="text-[10px] font-black text-amber-500 tracking-[0.2em] uppercase">Construction Site</p>
+                </div>
+                <p className="text-xs font-bold text-gray-400">할일을 미루면 집이 지어집니다</p>
               </div>
               {/* 안내판 기둥 */}
-              <div className="w-1 h-4 bg-yellow-400" />
-            </div>
+              <div className="w-1.5 h-6 bg-gray-100 rounded-b-full shadow-inner" />
+            </motion.div>
 
             {/* 땅 */}
-            <div className="w-full relative overflow-hidden rounded-lg" style={{ height: 64, background: '#d4b896' }}>
-              {/* 흙 질감 */}
-              <div className="absolute inset-0 opacity-30"
-                style={{ backgroundImage: 'repeating-linear-gradient(45deg, #b8976a 0px, #b8976a 2px, transparent 2px, transparent 8px)' }}
+            <div className="w-full relative overflow-hidden rounded-[32px] shadow-2xl shadow-gray-200/50" style={{ height: 80, background: '#f1f3f5' }}>
+              <div className="absolute inset-0 opacity-[0.03]"
+                style={{ backgroundImage: 'repeating-linear-gradient(45deg, #000 0px, #000 1px, transparent 1px, transparent 10px)' }}
               />
               {/* 말뚝들 */}
-              {[10, 30, 50, 70, 90].map((left) => (
+              {[20, 40, 60, 80].map((left) => (
                 <div key={left} className="absolute bottom-0 flex flex-col items-center" style={{ left: `${left}%` }}>
-                  <div className="w-0 h-0" style={{ borderLeft: '4px solid transparent', borderRight: '4px solid transparent', borderBottom: '6px solid #ef4444' }} />
-                  <div className="w-1 bg-amber-800" style={{ height: 20 }} />
+                  <div className="w-2 h-2 rounded-full bg-rose-500 mb-1 shadow-lg shadow-rose-200" />
+                  <div className="w-1 bg-gray-200" style={{ height: 24 }} />
                 </div>
               ))}
-              {/* 줄 */}
-              <div className="absolute w-full" style={{ top: 18 }}>
-                <svg width="100%" height="8">
-                  <line x1="10%" y1="4" x2="90%" y2="4" stroke="#ef4444" strokeWidth="1.5" strokeDasharray="4 3" />
-                </svg>
-              </div>
             </div>
           </div>
         ) : (
-          <div className="flex flex-col-reverse w-full">
+          <div className="flex flex-col-reverse w-full shadow-2xl shadow-gray-200/40">
             <AnimatePresence>
               {floors.map((floor, i) => (
                 <Floor
@@ -99,7 +98,7 @@ export default function Building() {
             </AnimatePresence>
           </div>
         )}
-        <div className="w-full h-3 rounded-b" style={{ background: 'var(--theme-point)' }} />
+        <div className="w-full h-5 rounded-b-[32px] bg-gray-900 shadow-xl" />
       </div>
 
       {/* 붕괴 후 리셋 */}
@@ -108,25 +107,26 @@ export default function Building() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.8 }}
-          className="mt-6 text-center"
+          className="mt-12 text-center"
         >
-          <p className="font-bold mb-3 text-red-400">🏚️ 건물이 무너졌습니다...</p>
-          <button
-            onClick={resetBuilding}
-            className="font-bold px-6 py-2 rounded-full text-sm text-white"
-            style={{ background: 'var(--theme-text)' }}
-          >
-            다시 시작
-          </button>
+          <div className="bg-white rounded-3xl p-6 shadow-2xl border border-red-50 inline-block">
+            <p className="font-black text-gray-900 mb-4 tracking-tight">🏚️ 건물이 무너졌습니다...</p>
+            <button
+              onClick={resetBuilding}
+              className="font-black px-8 py-3 rounded-2xl text-xs text-white bg-gray-900 shadow-lg shadow-gray-200 active:scale-95 transition-transform"
+            >
+              처음부터 다시 쌓기
+            </button>
+          </div>
         </motion.div>
       )}
 
       {/* 개발용 초기화 버튼 */}
       <button
         onClick={handleDevReset}
-        className="mt-6 text-xs text-gray-300 underline"
+        className="mt-12 text-[10px] font-bold text-gray-300 uppercase tracking-widest hover:text-gray-400 transition-colors"
       >
-        [DEV] 초기화
+        [Dev] Clear All Data
       </button>
     </div>
   )
