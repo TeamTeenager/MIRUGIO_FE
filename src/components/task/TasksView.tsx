@@ -11,7 +11,7 @@ const importanceConfig: Record<Importance, { bg: string; border: string; label: 
 }
 
 export default function TasksView() {
-  const { tasks, addTask, completeTask, showWarning } = useGameStore()
+  const { tasks, addTask, startComplete, showWarning } = useGameStore()
   const [title, setTitle] = useState('')
   const [importance, setImportance] = useState<Importance>(3)
 
@@ -125,7 +125,7 @@ export default function TasksView() {
                 </span>
                 <span className="text-gray-600 text-sm flex-1 truncate">{task.title}</span>
                 <button
-                  onClick={() => completeTask(task.id)}
+                  onClick={() => startComplete(task.id)}
                   className="shrink-0 px-3 py-1.5 rounded-full text-xs font-bold text-white active:scale-95 transition-transform"
                   style={{ background: '#fca5a5' }}
                 >

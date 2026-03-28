@@ -31,15 +31,15 @@
   "directoryMap": {},
   "hotPaths": [
     {
-      "path": "src/components/task/TasksView.tsx",
-      "accessCount": 26,
-      "lastAccessed": 1774675292190,
+      "path": "src/store/useGameStore.ts",
+      "accessCount": 29,
+      "lastAccessed": 1774677534125,
       "type": "file"
     },
     {
-      "path": "src/store/useGameStore.ts",
-      "accessCount": 25,
-      "lastAccessed": 1774676893434,
+      "path": "src/components/task/TasksView.tsx",
+      "accessCount": 29,
+      "lastAccessed": 1774677542844,
       "type": "file"
     },
     {
@@ -149,6 +149,12 @@
       "accessCount": 1,
       "lastAccessed": 1774676961102,
       "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 1,
+      "lastAccessed": 1774677286173,
+      "type": "directory"
     }
   ],
   "userDirectives": []

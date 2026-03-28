@@ -7,9 +7,11 @@ import { supabase } from '../lib/supabase'
 interface GameActions {
   addTask: (title: string, importance: Importance) => void
   procrastinate: (taskId: string) => void
+  startComplete: (taskId: string) => void
   completeTask: (taskId: string) => void
   setActiveTab: (tab: 'home' | 'tasks') => void
   clearPendingAnimation: () => void
+  clearPendingComplete: () => void
   dismissWarning: () => void
   collapseBuilding: () => void
   resetBuilding: () => void
@@ -20,6 +22,7 @@ interface GameActions {
 interface ExtendedState extends GameState {
   userId: string | null
   pendingAnimation: number | null
+  pendingComplete: string | null
 }
 
 const initialState: ExtendedState = {
@@ -34,6 +37,7 @@ const initialState: ExtendedState = {
   activeTab: 'home',
   userId: null,
   pendingAnimation: null,
+  pendingComplete: null,
 }
 
 export const useGameStore = create<ExtendedState & GameActions>()(
@@ -231,8 +235,13 @@ export const useGameStore = create<ExtendedState & GameActions>()(
         }
       },
 
+      startComplete: (taskId) => {
+        set({ activeTab: 'home', pendingComplete: taskId })
+      },
+
       setActiveTab: (tab) => set({ activeTab: tab }),
       clearPendingAnimation: () => set({ pendingAnimation: null }),
+      clearPendingComplete: () => set({ pendingComplete: null }),
 
       dismissWarning: () => {
         set({ showWarning: false, warningDismissedAt: new Date().toISOString() })

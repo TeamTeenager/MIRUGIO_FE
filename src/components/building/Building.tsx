@@ -5,7 +5,7 @@ import { supabase } from '../../lib/supabase'
 import Floor from './Floor'
 
 export default function Building() {
-  const { floors, isCollapsed, resetBuilding, pendingAnimation, clearPendingAnimation, userId } = useGameStore()
+  const { floors, isCollapsed, resetBuilding, pendingAnimation, clearPendingAnimation, pendingComplete, clearPendingComplete, completeTask, userId } = useGameStore()
 
   const handleDevReset = async () => {
     if (userId) {
@@ -24,6 +24,16 @@ export default function Building() {
       return () => clearTimeout(t)
     }
   }, [pendingAnimation])
+
+  useEffect(() => {
+    if (pendingComplete !== null) {
+      const t = setTimeout(() => {
+        completeTask(pendingComplete)
+        clearPendingComplete()
+      }, 500)
+      return () => clearTimeout(t)
+    }
+  }, [pendingComplete])
 
   useEffect(() => {
     if (isCollapsed && scope.current) {

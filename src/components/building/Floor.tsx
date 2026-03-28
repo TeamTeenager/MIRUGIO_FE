@@ -31,11 +31,30 @@ export default function Floor({ floor, index, isNew }: Props) {
       initial={{ scaleY: 0, opacity: 0 }}
       animate={{ scaleY: 1, opacity: 1 }}
       exit={{
-        x: [0, -8, 8, -6, 6, -3, 3, 0],
-        scaleY: [1, 1, 1, 1, 1, 1, 0.5, 0],
-        opacity: [1, 1, 1, 1, 1, 0.8, 0.4, 0],
-        filter: ['brightness(1)', 'brightness(2.5) sepia(1) hue-rotate(-20deg)', 'brightness(1.5)', 'brightness(1)', 'brightness(1)', 'brightness(1)', 'brightness(1)', 'brightness(1)'],
-        transition: { duration: 0.7, ease: 'easeIn' }
+        x: [0, -12, 12, -10, 10, -8, 8, -10, 10, -8, 8, -5, 5, -3, 3, 0, 0, 0],
+        scaleY: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.4, 0],
+        opacity: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.9, 0.7, 0.4, 0.2, 0],
+        filter: [
+          'brightness(1)',
+          'brightness(2.5) sepia(1) hue-rotate(-20deg)',
+          'brightness(1)',
+          'brightness(2) sepia(1) hue-rotate(-20deg)',
+          'brightness(1)',
+          'brightness(1.8) sepia(1) hue-rotate(-20deg)',
+          'brightness(1)',
+          'brightness(1.5) sepia(1) hue-rotate(-20deg)',
+          'brightness(1)',
+          'brightness(1.3)',
+          'brightness(1)',
+          'brightness(1)',
+          'brightness(1)',
+          'brightness(1)',
+          'brightness(1)',
+          'brightness(1)',
+          'brightness(1)',
+          'brightness(1)',
+        ],
+        transition: { duration: 3, ease: 'easeIn' }
       }}
       transition={{ duration: 0.35, delay: index * 0.04 }}
       style={{ transformOrigin: 'bottom' }}
