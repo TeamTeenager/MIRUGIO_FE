@@ -81,17 +81,22 @@ export const useGameStore = create<ExtendedState & GameActions>()(
       },
 
       addTask: (title, importance) => {
-        const { floors, streak, showWarning, userId } = get()
+        const { floors, streak, showWarning, warningType, userId } = get()
 
         const today = new Date().toDateString()
 
-        // 하루 1층 제한 (테스트 중 비활성화)
-        // if (lastProcrastinatedDate === today) return
-
-        if (showWarning && importance < 4) {
-          get().collapseBuilding()
-          return
+        // 붕괴 체크
+        if (showWarning) {
+          if (warningType === 'consecutive' && importance !== 5) {
+            get().collapseBuilding()
+            return
+          }
+          if (warningType === 'stability' && importance < 4) {
+            get().collapseBuilding()
+            return
+          }
         }
+
         // 테스트 중: 등록할 때마다 +1
         const newStreak = streak + 1
 
@@ -119,7 +124,7 @@ export const useGameStore = create<ExtendedState & GameActions>()(
         const newFloors = [...floors, newFloor]
         const newStability = calcStability(newFloors)
 
-        const isConsecutive = newFloors.length >= 3 && newFloors.slice(-3).every(f => f.importance === importance)
+        const isConsecutive = newFloors.length >= 2 && newFloors.slice(-2).every(f => f.importance === importance)
         const currentShowWarning = newStability < 40 || isConsecutive
         const currentWarningType = isConsecutive ? 'consecutive' : (newStability < 40 ? 'stability' : null)
 
@@ -164,13 +169,20 @@ export const useGameStore = create<ExtendedState & GameActions>()(
       },
 
       procrastinate: (taskId) => {
-        const { tasks, floors, streak, lastProcrastinatedDate, showWarning } = get()
+        const { tasks, floors, streak, lastProcrastinatedDate, showWarning, warningType } = get()
         const task = tasks.find((t) => t.id === taskId)
         if (!task) return
 
-        if (showWarning && task.importance < 4) {
-          get().collapseBuilding()
-          return
+        // 붕괴 체크
+        if (showWarning) {
+          if (warningType === 'consecutive' && task.importance !== 5) {
+            get().collapseBuilding()
+            return
+          }
+          if (warningType === 'stability' && task.importance < 4) {
+            get().collapseBuilding()
+            return
+          }
         }
 
         const today = new Date().toDateString()
@@ -194,7 +206,7 @@ export const useGameStore = create<ExtendedState & GameActions>()(
 
         const newFloors = [...floors, newFloor]
         const newStability = calcStability(newFloors)
-        const isConsecutive = newFloors.length >= 3 && newFloors.slice(-3).every(f => f.importance === task.importance)
+        const isConsecutive = newFloors.length >= 2 && newFloors.slice(-2).every(f => f.importance === task.importance)
         const currentShowWarning = newStability < 40 || isConsecutive
         const currentWarningType = isConsecutive ? 'consecutive' : (newStability < 40 ? 'stability' : null)
 

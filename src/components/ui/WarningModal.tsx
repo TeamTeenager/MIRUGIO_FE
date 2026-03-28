@@ -32,17 +32,17 @@ export default function WarningModal() {
               <p className="text-gray-600 text-sm leading-relaxed">
                 {isStability 
                   ? '너무 사소한 일만 미루고 있어요.' 
-                  : '똑같은 중요도의 층이 계속 쌓이고 있습니다.'}
+                  : '똑같은 중요도의 층이 연속으로 쌓였습니다!'}
               </p>
               <p className="font-bold text-base text-red-500">
                 {isStability
                   ? '지금 당장 중요도 4단계 이상의 일을 미뤄야 합니다!'
-                  : '분위기 전환을 위해 다른 중요도의 일을 미뤄보세요!'}
+                  : '지금 당장 중요도 5단계의 일을 미뤄야 합니다!'}
               </p>
               <p className="text-gray-400 text-xs">
                 {isStability
                   ? '계속 낮은 중요도 일을 미루면 건물이 무너집니다.'
-                  : '다양한 층을 쌓아야 건물이 더 견고해집니다.'}
+                  : '5단계 일을 미루지 않으면 건물이 즉시 붕괴됩니다.'}
               </p>
             </div>
 

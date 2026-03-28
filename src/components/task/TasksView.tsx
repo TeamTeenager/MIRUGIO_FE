@@ -17,7 +17,8 @@ export default function TasksView() {
 
   const done = [...tasks].filter((t) => t.status === 'procrastinated').reverse()
   const isStabilityWarning = showWarning && warningType === 'stability'
-  const isBlocked = isStabilityWarning && importance < 4
+  const isConsecutiveWarning = showWarning && warningType === 'consecutive'
+  const isBlocked = (isStabilityWarning && importance < 4) || (isConsecutiveWarning && importance !== 5)
 
   const handleAdd = () => {
     if (!title.trim() || isBlocked) return
@@ -40,12 +41,12 @@ export default function TasksView() {
               <span className="text-2xl shrink-0">⚠️</span>
               <div>
                 <h4 className="font-black text-red-500 text-sm tracking-tight mb-0.5">
-                  {warningType === 'stability' ? '붕괴 위험 감지!' : '건축물 다양성 부족!'}
+                  {warningType === 'stability' ? '붕괴 위험 감지!' : '단조로운 건축 양식!'}
                 </h4>
                 <p className="text-gray-500 text-[11px] leading-relaxed">
                   {warningType === 'stability' 
                     ? '건물이 너무 불안정합니다. 중요도 4단계 이상의 일을 미뤄서 지지대를 만드세요!' 
-                    : '똑같은 층만 쌓으면 건물이 지루해져요. 다른 중요도의 일을 선택해보세요.'}
+                    : '똑같은 층이 연속으로 쌓였습니다. 지금 당장 5단계의 일을 미루지 않으면 건물이 무너집니다!'}
                 </p>
               </div>
             </div>
@@ -80,7 +81,7 @@ export default function TasksView() {
             
             <div className="flex gap-2.5">
               {([1, 2, 3, 4, 5] as Importance[]).map((level) => {
-                const blocked = isStabilityWarning && level < 4
+                const blocked = (isStabilityWarning && level < 4) || (isConsecutiveWarning && level !== 5)
                 const isSelected = importance === level
                 return (
                   <button
