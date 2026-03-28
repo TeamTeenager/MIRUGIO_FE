@@ -1,0 +1,149 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1774668988700,
+  "projectRoot": "/Users/leejh/Desktop/MIRUGIO_FE",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {},
+  "hotPaths": [
+    {
+      "path": "src/components/task/TasksView.tsx",
+      "accessCount": 26,
+      "lastAccessed": 1774675292190,
+      "type": "file"
+    },
+    {
+      "path": "src/store/useGameStore.ts",
+      "accessCount": 21,
+      "lastAccessed": 1774675452976,
+      "type": "file"
+    },
+    {
+      "path": "src/App.tsx",
+      "accessCount": 12,
+      "lastAccessed": 1774675044195,
+      "type": "file"
+    },
+    {
+      "path": "src/types/index.ts",
+      "accessCount": 4,
+      "lastAccessed": 1774670003676,
+      "type": "file"
+    },
+    {
+      "path": "src/components/ui/StreakBadge.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1774675112763,
+      "type": "file"
+    },
+    {
+      "path": "src/index.css",
+      "accessCount": 3,
+      "lastAccessed": 1774671023758,
+      "type": "file"
+    },
+    {
+      "path": "src/lib/theme.ts",
+      "accessCount": 3,
+      "lastAccessed": 1774674589189,
+      "type": "file"
+    },
+    {
+      "path": "package.json",
+      "accessCount": 2,
+      "lastAccessed": 1774669139427,
+      "type": "file"
+    },
+    {
+      "path": "vite.config.ts",
+      "accessCount": 2,
+      "lastAccessed": 1774669366090,
+      "type": "file"
+    },
+    {
+      "path": "src/lib/supabase.ts",
+      "accessCount": 2,
+      "lastAccessed": 1774670599033,
+      "type": "file"
+    },
+    {
+      "path": "src/components/ui/TabBar.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1774671064825,
+      "type": "file"
+    },
+    {
+      "path": "src/components/ui/WarningModal.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1774671076348,
+      "type": "file"
+    },
+    {
+      "path": "src/components/ui/Onboarding.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1774671088601,
+      "type": "file"
+    },
+    {
+      "path": "src/utils/stability.ts",
+      "accessCount": 1,
+      "lastAccessed": 1774669288047,
+      "type": "file"
+    },
+    {
+      "path": "src/components/task/AddTaskModal.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1774669341318,
+      "type": "file"
+    },
+    {
+      "path": "src/components/task/TaskList.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1774669348832,
+      "type": "file"
+    },
+    {
+      "path": ".env",
+      "accessCount": 1,
+      "lastAccessed": 1774670365022,
+      "type": "file"
+    },
+    {
+      "path": "supabase-schema.sql",
+      "accessCount": 1,
+      "lastAccessed": 1774670387895,
+      "type": "file"
+    },
+    {
+      "path": "src/lib/auth.ts",
+      "accessCount": 1,
+      "lastAccessed": 1774670814512,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

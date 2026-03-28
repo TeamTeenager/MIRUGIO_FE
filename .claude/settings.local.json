@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(mv /Users/leejh/Desktop/MIRUGIO_FE/tmp/mirugio_temp/* /Users/leejh/Desktop/MIRUGIO_FE/)",
+      "Bash(mv /Users/leejh/Desktop/MIRUGIO_FE/tmp/mirugio_temp/.* /Users/leejh/Desktop/MIRUGIO_FE/)",
+      "Bash(rm -rf /Users/leejh/Desktop/MIRUGIO_FE/tmp)",
+      "Bash(npm install:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npm run:*)"
+    ]
+  }
+}
