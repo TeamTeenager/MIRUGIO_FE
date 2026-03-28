@@ -17,11 +17,10 @@ export default function TasksView() {
 
   const done = [...tasks].filter((t) => t.status === 'procrastinated').reverse()
   const isStabilityWarning = showWarning && warningType === 'stability'
-  const isConsecutiveWarning = showWarning && warningType === 'consecutive'
-  const isBlocked = (isStabilityWarning && importance < 4) || (isConsecutiveWarning && importance !== 5)
+  const isBlocked = false // 사용자가 실수해서 무너질 수 있도록 차단하지 않음
 
   const handleAdd = () => {
-    if (!title.trim() || isBlocked) return
+    if (!title.trim()) return
     addTask(title.trim(), importance)
     setTitle('')
   }
@@ -81,20 +80,19 @@ export default function TasksView() {
             
             <div className="flex gap-2.5">
               {([1, 2, 3, 4, 5] as Importance[]).map((level) => {
-                const blocked = (isStabilityWarning && level < 4) || (isConsecutiveWarning && level !== 5)
+                const isDanger = (isStabilityWarning && level < 4) || (warningType === 'consecutive' && level !== 5)
                 const isSelected = importance === level
                 return (
                   <button
                     key={level}
-                    onClick={() => !blocked && setImportance(level)}
-                    disabled={blocked}
+                    onClick={() => setImportance(level)}
                     className={`
                       flex-1 h-14 rounded-2xl flex items-center justify-center transition-all relative overflow-hidden
                       ${isSelected ? 'bg-gray-900 scale-105 shadow-xl shadow-gray-200' : 'bg-gray-50'}
-                      ${blocked ? 'opacity-20 grayscale' : 'opacity-100'}
+                      ${isDanger && isSelected ? 'ring-2 ring-red-500' : ''}
                     `}
                   >
-                    <span className={`text-lg font-black ${isSelected ? 'text-white' : 'text-gray-400'}`}>
+                    <span className={`text-lg font-black ${isSelected ? 'text-white' : 'text-gray-400'} ${isDanger && !isSelected ? 'text-red-300' : ''}`}>
                       {level}
                     </span>
                     {isSelected && (

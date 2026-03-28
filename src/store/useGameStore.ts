@@ -81,20 +81,22 @@ export const useGameStore = create<ExtendedState & GameActions>()(
       },
 
       addTask: (title, importance) => {
-        const { floors, streak, showWarning, warningType, userId } = get()
+        const { floors, streak, userId } = get()
 
         const today = new Date().toDateString()
 
-        // 붕괴 체크
-        if (showWarning) {
-          if (warningType === 'consecutive' && importance !== 5) {
-            get().collapseBuilding()
-            return
-          }
-          if (warningType === 'stability' && importance < 4) {
-            get().collapseBuilding()
-            return
-          }
+        // 붕괴 체크 (현재 층들의 상태로 판단)
+        const currentStability = calcStability(floors)
+        const lastTwo = floors.slice(-2)
+        const isCurrentlyConsecutive = lastTwo.length >= 2 && lastTwo.every(f => f.importance === lastTwo[0].importance)
+
+        if (isCurrentlyConsecutive && importance !== 5) {
+          get().collapseBuilding()
+          return
+        }
+        if (currentStability < 40 && importance < 4) {
+          get().collapseBuilding()
+          return
         }
 
         // 테스트 중: 등록할 때마다 +1
@@ -170,20 +172,22 @@ export const useGameStore = create<ExtendedState & GameActions>()(
       },
 
       procrastinate: (taskId) => {
-        const { tasks, floors, streak, lastProcrastinatedDate, showWarning, warningType } = get()
+        const { tasks, floors, streak, lastProcrastinatedDate } = get()
         const task = tasks.find((t) => t.id === taskId)
         if (!task) return
 
         // 붕괴 체크
-        if (showWarning) {
-          if (warningType === 'consecutive' && task.importance !== 5) {
-            get().collapseBuilding()
-            return
-          }
-          if (warningType === 'stability' && task.importance < 4) {
-            get().collapseBuilding()
-            return
-          }
+        const currentStability = calcStability(floors)
+        const lastTwo = floors.slice(-2)
+        const isCurrentlyConsecutive = lastTwo.length >= 2 && lastTwo.every(f => f.importance === lastTwo[0].importance)
+
+        if (isCurrentlyConsecutive && task.importance !== 5) {
+          get().collapseBuilding()
+          return
+        }
+        if (currentStability < 40 && task.importance < 4) {
+          get().collapseBuilding()
+          return
         }
 
         const today = new Date().toDateString()
